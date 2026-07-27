@@ -1,0 +1,16 @@
+services:
+  postgres-db-alura-audit:
+    image: postgres:14
+    container_name: postgres-db-alura-audit-container
+    environment:
+      - POSTGRES_USER=joao
+      - POSTGRES_PASSWORD=joao
+      - POSTGRES_DB=audit
+    ports:
+      - 5434:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
+    driver: local
