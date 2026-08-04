@@ -1,0 +1,48 @@
+# Maven
+target/
+pom.xml.versionsBackup
+release.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Quarkus
+.quarkus/
+*-runner
+*-runner.jar
+build/
+dist/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+.factorypath
+.apt_generated/
+.apt_generated_tests/
+
+# NetBeans
+nb-configuration.xml
+nbactions.xml
+
+# VS Code
+.vscode/
+
+# Logs e temporários
+*.log
+*.class
+*.swp
+*~
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente locais
+.env
+.env.local
