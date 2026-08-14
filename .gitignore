@@ -30,8 +30,9 @@ dist/
 nb-configuration.xml
 nbactions.xml
 
-# VS Code
+# VS Code e IA
 .vscode/
+.claude/
 
 # Logs e temporários
 *.log
