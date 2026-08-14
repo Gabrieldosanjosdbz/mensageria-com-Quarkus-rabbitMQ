@@ -15,8 +15,7 @@ public class Audit {
 
     }
 
-    public Audit(Long id, String cnpj, String status) {
-        this.id = id;
+    public Audit(String cnpj, String status) {
         this.cnpj = cnpj;
         this.status = status;
     }
