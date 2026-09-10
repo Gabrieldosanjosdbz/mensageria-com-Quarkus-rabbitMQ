@@ -2,6 +2,9 @@ package com.alura.agencias.controller;
 
 import com.alura.agencias.domain.Agencia;
 import com.alura.agencias.service.AgenciaService;
+import io.smallrye.common.annotation.NonBlocking;
+import io.smallrye.mutiny.Uni;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.UriInfo;
@@ -17,28 +20,32 @@ public class AgenciaController {
     }
 
     @POST
-    public RestResponse<Void> cadastrar(Agencia agencia, @Context UriInfo uriInfo) {
-        this.agenciaService.cadastrar(agencia);
-        return RestResponse.created(uriInfo.getAbsolutePathBuilder().build());
+    @NonBlocking
+    @Transactional
+    public Uni<RestResponse<Void>> cadastrar(Agencia agencia, @Context UriInfo uriInfo) {
+        return this.agenciaService.cadastrar(agencia)
+                .replaceWith(RestResponse.created(uriInfo.getAbsolutePathBuilder().build()));
     }
 
     @GET
     @Path("{id}")
-    public RestResponse<Agencia> buscarPorId(Integer id) {
-        Agencia agencia = this.agenciaService.buscarPorId(id);
-        return RestResponse.ok(agencia);
+    public Uni<RestResponse<Agencia>> buscarPorId(Long id) {
+        Uni<Agencia> agencia = this.agenciaService.buscarPorId(id);
+        return agencia.onItem().transform(RestResponse::ok);
     }
 
     @DELETE
+    @NonBlocking
     @Path("{id}")
-    public RestResponse<Void> deletar(Integer id) {
-        this.agenciaService.deletar(id);
-        return RestResponse.ok();
+    @Transactional
+    public Uni<RestResponse<Void>> deletar(Long id) {
+        return this.agenciaService.deletar(id).replaceWith(RestResponse.ok());
     }
 
     @PUT
-    public RestResponse<Void> alterar(Agencia agencia) {
-        this.agenciaService.alterar(agencia);
-        return RestResponse.ok();
+    @NonBlocking
+    @Transactional
+    public Uni<RestResponse<Void>> alterar(Agencia agencia) {
+        return this.agenciaService.alterar(agencia).replaceWith(RestResponse.ok());
     }
 }

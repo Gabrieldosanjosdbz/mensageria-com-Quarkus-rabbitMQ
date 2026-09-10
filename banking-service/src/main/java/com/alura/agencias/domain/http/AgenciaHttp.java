@@ -2,10 +2,17 @@ package com.alura.agencias.domain.http;
 
 public class AgenciaHttp {
 
-    private String nome;
-    private String razaoSocial;
-    private String cnpj;
-    private SituacaoCadastral situacaoCadastral;
+    public AgenciaHttp(String nome, String razaoSocial, String cnpj, String situacaoCadastral) {
+        this.nome = nome;
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
+        this.situacaoCadastral = SituacaoCadastral.valueOf(situacaoCadastral);
+    }
+
+    private final String nome;
+    private final String razaoSocial;
+    private final String cnpj;
+    private final SituacaoCadastral situacaoCadastral;
 
     public String getNome() {
         return nome;
@@ -23,4 +30,3 @@ public class AgenciaHttp {
         return situacaoCadastral;
     }
 }
-

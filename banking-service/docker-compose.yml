@@ -1,0 +1,17 @@
+services:
+  postgres-db-alura-banking-service:
+    image: postgres:14
+    container_name: postgres-db-alura-banking-service-container
+    environment:
+      - POSTGRES_USER=joao
+      - POSTGRES_PASSWORD=joao
+      - POSTGRES_DB=agencia
+    ports:
+      - 5433:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
+    driver: local
+
